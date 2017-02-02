@@ -1,0 +1,2 @@
+class CatalogEntry < ApplicationRecord
+end
