@@ -22,5 +22,14 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+* Run `rake db:load_catalog_entries`
+
+* Haml version 4.0.7
+
+* Ruby version 2.3.1p112
+
+* Rails version 5.0.1
+
 # scot-basket
 # scot-basket
