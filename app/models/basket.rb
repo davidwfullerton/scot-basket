@@ -22,12 +22,20 @@ given the id of the current basket.
 
   #calculates total price of items before any discounts or VAT.
   def subtotal
-    items.pluck(:price).reduce(:+)
+    if items.exists?
+      items.pluck(:price).reduce(:+)
+    else
+      return 0
+    end
   end
 
   #sums the total vat of all items in the basket
   def total_vat
-    items.pluck(:vat).reduce(:+)
+    if items.exists?
+      items.pluck(:vat).reduce(:+)
+    else
+      return 0
+    end
   end
 
   #discount of £5 given for every second flag
@@ -48,7 +56,7 @@ given the id of the current basket.
 
   #final total, including VAT and discounts. Rounded to 2 decimal places
   def total
-    (subtotal + total_vat - flag_discount - total_discount).round(2)
+    (subtotal + total_vat - flag_discount - total_discount)
   end
 
 end

@@ -1,0 +1,32 @@
+.header
+  %h1 ScotBasket
+
+.content
+  =form_for @basket do |f|
+    .item_add
+      .item_select
+        %select{name: 'item'}
+          %option{value: 1} Scotland Flag
+          %option{value: 2} Child's Car Seat
+          %option{value: 3} Magnetic Wrist Band
+      .item_submit
+        =f.submit 'Add Item'
+  .total
+    %p= "Subtotal(inc VAT): #{@sub}"
+    -if @basket.flag_discount > 0
+      %p= "Flag Discount: #{number_to_currency(@basket.flag_discount, unit: '£',)}"
+    -if @basket.total_discount > 0
+      %p= "12% Discount off cost so far: #{number_to_currency(@basket.total_discount, unit: '£')}"
+    %p= "Final Total: #{number_to_currency(@basket.total, unit: '£')}"
+  .summary
+    -if @basket.items.count > 0
+      %h3 Summary of Items
+      %table.item_summary
+        %tr
+          %th Item Name
+          %th Price
+          %th VAT
+        - @basket.items.each do |i|
+          =render partial: 'item_summary', locals: {item: i}
+  .clear_basket
+    =link_to "New Basket", new_basket_path
