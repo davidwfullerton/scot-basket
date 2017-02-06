@@ -56,10 +56,76 @@ describe Basket do
     end
   end
 
-  describe '#subtotal' do
+  describe 'price calculations' do
     context 'when basket contains products 1,2,3' do
-      it 'will product a subtotal of 62.90' do
+      subject(:basket){FactoryGirl.create(:basket, item_1_amount: 1, item_2_amount: 1, item_3_amount: 1)}
+
+      it 'will have a subtotal of 62.90' do
         expect(basket.subtotal.round(2)).to eq(62.90)
+      end
+
+      it 'will have a total VAT of 3.50' do
+        expect(basket.total_vat.round(2)).to eq(3.50)
+      end
+
+      it 'will have a flag discount of 0' do
+        expect(basket.flag_discount).to eq(0)
+      end
+
+      it 'will have a total discount of 0' do
+        expect(basket.total_discount.round(2)).to eq(0)
+      end
+
+      it 'will have a final total of 66.40' do
+        expect(basket.total.round(2)).to eq(66.40)
+      end
+    end
+
+    context 'when basket contains products 2,1,2' do
+      subject(:basket){FactoryGirl.create(:basket, item_1_amount: 1, item_2_amount: 2)}
+
+      it 'will have a subtotal of 87.8' do
+        expect(basket.subtotal.round(2)).to eq(87.8)
+      end
+
+      it 'will have a total VAT of 3.39' do
+        expect(basket.total_vat.round(2)).to eq(3.39)
+      end
+
+      it 'will have a flag discount of 0' do
+        expect(basket.flag_discount).to eq(0)
+      end
+
+      it 'will have a total discount of 10.94' do
+        expect(basket.total_discount.round(2)).to eq(10.94)
+      end
+
+      it 'will have a final total of 80.25' do
+        expect(basket.total.round(2)).to eq(80.25)
+      end
+    end
+
+    context 'when basket contains products 3,1,2,1' do
+      subject(:basket){FactoryGirl.create(:basket, item_1_amount: 2, item_2_amount: 1, item_3_amount: 1)}
+
+      it 'will have a subtotal of 82.90' do
+        expect(basket.subtotal.round(2)).to eq(82.90)
+      end
+
+      it 'will have a total VAT of 3.50' do
+        expect(basket.total_vat.round(2)).to eq(3.50)
+      end
+
+      it 'will have a flag discount of 5' do
+        expect(basket.flag_discount).to eq(5)
+      end
+
+      it 'will have a total discount of 9.77' do
+        expect(basket.total_discount.round(2)).to eq(9.77)
+      end
+
+      it 'will have a final total of 71.63' do
+        expect(basket.total.round(2)).to eq(71.63)
       end
     end
   end

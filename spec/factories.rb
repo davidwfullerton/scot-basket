@@ -1,6 +1,4 @@
 FactoryGirl.define do
-  factory :basket do
-  end
 
   #factory :catalog_flag_entry, class: CatalogEntry do
   #  product_code 1
@@ -43,8 +41,22 @@ FactoryGirl.define do
   factory :item_3, class: Item do
     basket
     product_code 3
-    name "scotland_flag"
-    price 20
+    name "magnetic_wrist_band"
+    price 9
     vat 1.8
+  end
+
+  factory :basket do
+    transient do
+      item_1_amount 0
+      item_2_amount 0
+      item_3_amount 0
+    end
+
+    after(:create) do |basket, evaluator|
+      create_list(:item_1, evaluator.item_1_amount, basket: basket)
+      create_list(:item_2, evaluator.item_2_amount, basket: basket)
+      create_list(:item_3, evaluator.item_3_amount, basket: basket)
+    end
   end
 end
