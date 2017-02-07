@@ -1,33 +1,41 @@
-.header
-  %h1 ScotBasket
+.content.container-fluid
+  .row.header
+    %h1 ScotBasket
 
-.content
-  =form_for @basket do |f|
-    .item_add
-      %p.basket_text Select an item to add to the basket.
-      .item_select
-        %select{name: 'item'}
-          %option{value: 1} Scotland Flag
-          %option{value: 2} Child's Car Seat
-          %option{value: 3} Magnetic Wrist Band
-      .item_submit
-        =f.submit 'Add Item'
-  .total
-    %p= "Subtotal (inc VAT): #{@sub}"
-    -if @basket.flag_discount > 0
-      %p= "Flag Discount: #{number_to_currency(@basket.flag_discount, unit: '£',)}"
-    -if @basket.total_discount > 0
-      %p= "12% Discount off cost so far: #{number_to_currency(@basket.total_discount, unit: '£')}"
-    %p= "Final Total: #{number_to_currency(@basket.total, unit: '£')}"
-  .summary
-    -if @basket.items.count > 0
-      %h3 Summary of Items
-      %table.item_summary
-        %tr
-          %th Item Name
-          %th Price
-          %th VAT
-        - @basket.items.each do |i|
-          =render partial: 'item_summary', locals: {item: i}
-  .clear_basket
-    =link_to "New Basket", new_basket_path
+  .row.top_text
+    %p.basket_text Select an item to add to the basket.
+    =form_for @basket do |f|
+      .basket_select.col-sm-offset-1
+        .item_select.col-sm-3.col-sm-offset-3
+          %select{name: 'item'}
+            %option{value: 1} Scotland Flag
+            %option{value: 2} Child's Car Seat
+            %option{value: 3} Magnetic Wrist Band
+        .item_submit.col-sm-3
+          =f.submit 'Add Item'
+  .row
+    .total
+      %p= "Subtotal (inc VAT): #{@sub}"
+      -if @basket.flag_discount > 0
+        %p= "Flag Discount: #{number_to_currency(@basket.flag_discount, unit: '£',)}"
+      -if @basket.total_discount > 0
+        %p= "12% Discount off cost so far: #{number_to_currency(@basket.total_discount, unit: '£')}"
+      %p.final_total= "Final Total: #{number_to_currency(@basket.total, unit: '£')}"
+  .row
+    .summary.col-xs-12
+      -if @basket.items.count > 0
+        %h3 Summary of Items
+        %br
+        .row
+          .item_summary
+            %table.table-bordered.table
+              %tr
+                %th Item Name
+                %th Price
+                %th VAT
+              - @basket.items.each do |i|
+                =render partial: 'item_summary', locals: {item: i}
+  %br
+  .row.col-sm-offset-1
+    .clear_basket.col-xs-2.col-sm-offset-6
+      =link_to "New Basket", new_basket_path
