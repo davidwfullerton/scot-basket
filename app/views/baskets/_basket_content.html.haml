@@ -4,6 +4,7 @@
 .content
   =form_for @basket do |f|
     .item_add
+      %p.basket_text Select an item to add to the basket.
       .item_select
         %select{name: 'item'}
           %option{value: 1} Scotland Flag
@@ -12,7 +13,7 @@
       .item_submit
         =f.submit 'Add Item'
   .total
-    %p= "Subtotal(inc VAT): #{@sub}"
+    %p= "Subtotal (inc VAT): #{@sub}"
     -if @basket.flag_discount > 0
       %p= "Flag Discount: #{number_to_currency(@basket.flag_discount, unit: '£',)}"
     -if @basket.total_discount > 0
