@@ -10,7 +10,7 @@
 
 After cloning the repository use the following steps to setup the server locally:
 
-* If necessary run `apt-get install libz-dev` because the Nokogirl gem requires this.
+* If necessary run `apt-get install libz-dev` because the nokogirl gem requires this.
 
 * If necessary run `apt-get install nodejs` because the uglifier gem requires this.
 
@@ -34,3 +34,7 @@ If you do make changes to the CSV file and want to update the database run `rake
 ##Testing
 
 Run `bundle exec rspec spec/` to run the rspec tests. This includes the three provided test cases.
+
+##Possible Future Addition
+
+It had been my intention to add a feature where if the user's subtotal was close to the £70 needed for the discount to apply, then a notification would appear informing the user that they recieve the 12% discount if they added another item.
