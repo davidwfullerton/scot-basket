@@ -10,9 +10,13 @@
 
 After cloning the repository use the following steps to setup the server locally:
 
-* Run `bundle install` to install required gems
+* If necessary run `apt-get install libz-dev` because the Nokogirl gem requires this.
 
-* Run `rake db:migrate` to setup your database
+* If necessary run `apt-get install nodejs` because the uglifier gem requires this.
+
+* Run `bundle install` to install required gems.
+
+* Run `rake db:migrate` to setup your database.
 
 * Run `rake db:load_catalog_entries` load catalog entries into the database.
 
