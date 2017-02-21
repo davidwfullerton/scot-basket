@@ -23,7 +23,7 @@ given the id of the current basket.
   #calculates total price of items before any discounts or VAT.
   def subtotal
     if items.exists?
-      items.map{|x| x.catalog_entry.price}.sum
+      items.map{|x| x.price}.sum
     else
       return 0
     end
@@ -40,7 +40,7 @@ given the id of the current basket.
 
   #discount of £5 given for every second flag
   def flag_discount
-    list = items.select{|x| x.catalog_entry.product_code == 1}
+    list = items.select{|x| x.product_code == 1}
     flag_count = list.count
     (flag_count/2) * 5
   end
