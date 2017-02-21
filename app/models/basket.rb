@@ -16,14 +16,14 @@ given the id of the current basket.
       raise 'Invalid code given, no item added to basket'
     else
       catalog_entry = catalog_entries.first
-      self.items.create!(product_code: product_code, name: catalog_entry.name, price: catalog_entry.price, vat: catalog_entry.price * catalog_entry.vat_rate)
+      self.items.create!(catalog_entry: catalog_entry)
     end
   end
 
   #calculates total price of items before any discounts or VAT.
   def subtotal
     if items.exists?
-      items.pluck(:price).reduce(:+)
+      items.map{|x| x.catalog_entry.price}.sum
     else
       return 0
     end
@@ -32,7 +32,7 @@ given the id of the current basket.
   #sums the total vat of all items in the basket
   def total_vat
     if items.exists?
-      items.pluck(:vat).reduce(:+)
+      items.map{|x| x.vat}.sum
     else
       return 0
     end
@@ -40,7 +40,8 @@ given the id of the current basket.
 
   #discount of £5 given for every second flag
   def flag_discount
-    flag_count = items.where(product_code: 1).count
+    list = items.select{|x| x.catalog_entry.product_code == 1}
+    flag_count = list.count
     (flag_count/2) * 5
   end
 

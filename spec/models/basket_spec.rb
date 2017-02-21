@@ -16,15 +16,15 @@ describe Basket do
       end
 
       it 'will have an item with product code for a seat' do
-        expect(subject.product_code).to eq(seat.product_code)
+        expect(subject.catalog_entry.product_code).to eq(seat.product_code)
       end
 
       it 'will have an item with name of a seat' do
-        expect(subject.name).to eq(seat.name)
+        expect(subject.catalog_entry.name).to eq(seat.name)
       end
 
       it 'will have an item with the price for a seat' do
-        expect(subject.price).to eq(seat.price)
+        expect(subject.catalog_entry.price).to eq(seat.price)
       end
 
       it 'will have an item with VAT price for a seat' do
