@@ -18,7 +18,7 @@ After cloning the repository use the following steps to setup the server locally
 
 * Run `rake db:migrate` to setup your database.
 
-* Run `rake db:load_catalog_entries` load catalog entries into the database.
+* Run `rake db:seed` to populate catalog entries table based on `seeds.rb`
 
 * Run `bundle exec rails s` and the server will be hosted at `localhost:3000`
 
