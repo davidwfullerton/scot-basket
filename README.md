@@ -24,6 +24,8 @@ After cloning the repository use the following steps to setup the server locally
 
 ##Scripting
 
+Currently this feature has been replaced by the use of seeds.rb, however the feature still exists and can be used to add more itemes to the catalog.
+
 The script `load_catalog_entries` takes two CSV files, `gov_rates.csv` and `catalog.csv`, and imports the necessary data into the database under the class CatalogEntry, to be referenced later by the application.
 
 * `gov_rates.csv` holds the data regarding VAT types and the equivalent VAT rates. This allows the rates to be easily changed if needed.
